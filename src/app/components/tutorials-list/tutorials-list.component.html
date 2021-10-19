@@ -1,0 +1,39 @@
+<div class="list row">
+  <div class="col-md-6">
+    <h4>Categorias</h4>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Description</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Más</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tutorial of tutorials; let i = index" [class.active]="i == currentIndex"
+          (click)="setActiveTutorial(tutorial, i)">
+          <td>{{ tutorial.title }}</td>
+          <td>{{ tutorial.description }}</td>
+          <td *ngIf="!tutorial.state">M</td>
+          <td *ngIf="tutorial.state">B</td>
+          <td> <button class="btn btn-sm btn-info"><i class="far fa-eye"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials()">
+      Borrar todos los registros
+    </button>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentTutorial">
+      <app-tutorial-details (refreshList)="refreshList()" [tutorial]="currentTutorial"></app-tutorial-details>
+    </div>
+
+    <div *ngIf="!currentTutorial">
+      <br />
+      <p>Seleccione una categoria...</p>
+    </div>
+  </div>
+</div>
